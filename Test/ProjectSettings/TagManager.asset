@@ -25,6 +25,16 @@ TagManager:
   - Wall
   - Bomb
   - Explosion
+  - Man
+  - toolbar
+  - chest
+  - ShowOnPause
+  - inventory
+  - shop
+  - dialoguePanel
+  - ShowOnAbout
+  - ShowOnControls
+  - startDialogue
   layers:
   - Default
   - TransparentFX
@@ -61,4 +71,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Objects
+    uniqueID: 2082281983
+    locked: 0
+  - name: Fire
+    uniqueID: 4193567201
+    locked: 0
+  - name: Background
+    uniqueID: 2987822625
+    locked: 0
+  - name: Player
+    uniqueID: 1519179465
     locked: 0

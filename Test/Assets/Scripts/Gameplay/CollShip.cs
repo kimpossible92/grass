@@ -11,7 +11,7 @@ public class CollShip : MonoBehaviour
         Level = level;
     }
     public int viewLevel() { return Level; }
-    [SerializeField]int Level = 0;
+    [SerializeField] int Level = 0;
     public enum slojnost
     {
         easy = 1, normal = 3, hard = 5, nevosmojno = 10
@@ -30,10 +30,13 @@ public class CollShip : MonoBehaviour
     public static Vector2 bombermanPosition, bombermanPositionRounded;
     Vector2 dir2; int dr = 5;
     Animator anim; Vector3 startpos1;
-    [SerializeField]GameObject naturalPrefab;
+    [SerializeField] GameObject naturalPrefab;
     [SerializeField]
     GameObject naturalPrefab2;
-    [SerializeField] GameObject[] Cubs= new GameObject[3];
+    [SerializeField] GameObject[] Cubs = new GameObject[3];
+    [SerializeField] GameObject Bag;
+    [SerializeField] Vector3 bagPosition = Vector3.zero;
+    List<List<GameObject>> BagObjects = new List<List<GameObject>>();
     public void NewStart()
     {
         dead = false;
@@ -43,6 +46,7 @@ public class CollShip : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        bagPosition = Bag.transform.position;
         NewStart();
     }
     private void Update()
@@ -95,7 +99,7 @@ public class CollShip : MonoBehaviour
     private List<int> types = new List<int>();
     public void AddList(List<int> list)
     {
-        foreach(var t in types)
+        foreach (var t in types)
         {
             list.Add(t);
         }
@@ -116,7 +120,7 @@ public class CollShip : MonoBehaviour
         //ingrCountTarget[i]--;
 
         ingredientFly = true;
-        GameObject ingr = Cubs[0].gameObject;//
+        GameObject ingr = Cubs[0].gameObject;
 
         //if (targetBlocks > 0)
         //{
@@ -129,7 +133,7 @@ public class CollShip : MonoBehaviour
         Vector3 startPos = item.transform.localPosition;
         float speed = UnityEngine.Random.Range(0.4f, 0.6f);
         float distCovered = 0;
-        while (distCovered < 0.5f&&item!=null)
+        while (distCovered < 0.5f && item != null)
         {
             distCovered = (Time.time - startTime) * speed;
             item.transform.localPosition = new Vector3(curveX.Evaluate(distCovered), curveY.Evaluate(distCovered), 0);
@@ -146,7 +150,7 @@ public class CollShip : MonoBehaviour
     {
         if (collision.gameObject.tag == "w")
         {
-            if (types.Count < 75)
+            if (types.Count < 575)
             {
                 types.Add(collision.GetComponent<Block>().types);
                 Destroy(collision.gameObject);
@@ -160,17 +164,18 @@ public class CollShip : MonoBehaviour
         }
         if (collision.gameObject.tag == "bonus")
         {
-            
-            if (types.Count > 30) { Cubs[0].SetActive(true); }
+
+            if (types.Count > 530) { Cubs[0].SetActive(true); }
             else { Cubs[0].SetActive(false); }
-            if (types.Count > 45) { Cubs[1].SetActive(true); }
+            if (types.Count > 545) { Cubs[1].SetActive(true); }
             else { Cubs[1].SetActive(false); }
-            if (types.Count > 70) { Cubs[2].SetActive(true); }
-            else{ Cubs[2].SetActive(false); }
-            if (types.Count < 75) {
+            if (types.Count > 570) { Cubs[2].SetActive(true); }
+            else { Cubs[2].SetActive(false); }
+            if (types.Count < 575)
+            {
                 var natural2 = Instantiate(naturalPrefab2, collision.gameObject.transform);
                 StartCoroutine(StartAnimateIngredientOther(natural2));
-                types.Add(collision.GetComponent<Block>().types); 
+                types.Add(collision.GetComponent<Block>().types);
             }
             else
             {
@@ -178,11 +183,11 @@ public class CollShip : MonoBehaviour
                 natural.GetComponent<Block>().types = collision.gameObject.GetComponent<Block>().types;
             }
             collision.GetComponent<Block>().DestroyBlocks();
-            if (collision.GetComponent<Block>().types == 0) {  }
-            if (collision.GetComponent<Block>().types == 1) {  }
-            if (collision.GetComponent<Block>().types == 2) {  }
-            if (collision.GetComponent<Block>().types == 3) {  }
-            if (collision.GetComponent<Block>().types == 4) {  }
+            if (collision.GetComponent<Block>().types == 0) { }
+            if (collision.GetComponent<Block>().types == 1) { }
+            if (collision.GetComponent<Block>().types == 2) { }
+            if (collision.GetComponent<Block>().types == 3) { }
+            if (collision.GetComponent<Block>().types == 4) { }
         }
     }
 }

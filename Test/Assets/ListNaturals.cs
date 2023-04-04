@@ -51,13 +51,13 @@ public class ListNaturals : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = types.Count.ToString();
+        //text.text = types.Count.ToString();
     }
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Cube" && collShip.isnull())
         {
-            text.GetComponent<Animator>().SetBool("animate", true);
+            //text.GetComponent<Animator>().SetBool("animate", true);
         }
     }
     private void OnTriggerExit(Collider collision)

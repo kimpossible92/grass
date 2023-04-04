@@ -63,7 +63,7 @@ namespace Gameplay.ShipName
                     //jump = false;
                 }
             }
-            else { movementSystem.LateralRotate(pointrot); }
+            else { /*movementSystem.LateralRotate(pointrot); */}
             movementSystem.LongMovement(_moveDirection.y * Time.deltaTime);
             //transform.Translate(Vector3.right*speed);
             if (
@@ -81,10 +81,19 @@ namespace Gameplay.ShipName
             }
 
         }
-        
+        [SerializeField]bool activated = false;
+        public bool _Activated => activated;
+        public void Set_activated()
+        {
+            activated = true;
+        }
+        public void Unset_Activated()
+        {
+            activated = false;
+        }
         private void Update()
         {
-            PlayerHandle();
+            if(activated)PlayerHandle();
         }
         Vector3 awakePosition;
         private void Awake()
